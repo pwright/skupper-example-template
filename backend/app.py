@@ -18,15 +18,24 @@
 #
 
 import os
-import pymysql.cursors
 from flask import Flask, Response
 from threading import Lock
+from flaskext.mysql import MySQL
 
 app = Flask(__name__)
 
-host = os.environ.get("DB_SERVICE_HOST", "0.0.0.0")
+mysql = MySQL()
+
+# MySQL configurations
+app.config["MYSQL_DATABASE_USER"] = "skupper"
+app.config["MYSQL_DATABASE_PASSWORD"] = "reppuks"
+app.config["MYSQL_DATABASE_DB"] = "skupper"
+app.config["MYSQL_DATABASE_HOST"] = os.getenv("MYSQL_SERVICE_HOST")
+app.config["MYSQL_DATABASE_PORT"] = int(os.getenv("MYSQL_SERVICE_PORT"))
+mysql.init_app(app)
+
 host = os.environ.get("BACKEND_SERVICE_HOST", "0.0.0.0")
-port = int(os.environ.get("BACKEND_SERVICE_PORT", 8080))
+port = int(os.environ.get("BACKEND_SERVICE_PORT", 8081))
 
 pod = os.environ.get("HOSTNAME", "hello-world-backend")
 
@@ -45,21 +54,9 @@ def hello():
     with lock:
         count += 1
     
-    # Connect to the database
-    connection = pymysql.connect(host='mydb',
-                             user='skupper',
-                             password='reppuks',
-                             database='skupper',
-                             cursorclass=pymysql.cursors.DictCursor)
-    with connection.cursor() as cursor:
-        # Read a single record
-        sql = "SELECT `text` FROM `greetings` WHERE `ID`=%s"
-        cursor.execute(sql, ('1',))
-        result = cursor.fetchone()
-        # print(result)
 
 
-    return Response(f"{result} ({count})", mimetype="text/plain")
+    return Response(f" ({count})", mimetype="text/plain")
 
 if __name__ == "__main__":
     app.run(host=host, port=port)

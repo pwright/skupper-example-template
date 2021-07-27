@@ -19,7 +19,8 @@
 
 FROM registry.fedoraproject.org/fedora-minimal
 
-RUN microdnf -y install python3-flask python3-PyMySQL && microdnf clean all
+RUN microdnf -y install python3-flask && microdnf clean all
+RUN pip3 install flask-mysql
 
 COPY app.py /app/app.py
 ENV HOME=/app
