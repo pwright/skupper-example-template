@@ -33,7 +33,7 @@ backend_port = int(os.environ.get("BACKEND_SERVICE_PORT", 8080))
 @app.errorhandler(Exception)
 def error(e):
     app.logger.error(e)
-    return Response(f"Trouble! {e}\n", status=500, mimetype="text/plain")
+    return Response(f"Connection Trouble! {e}\n", status=500, mimetype="text/plain")
 
 @app.route("/")
 def message():
