@@ -24,14 +24,6 @@ commands:
   id: debugpy
 components:
 - container:
-    endpoints:
-    - name: web
-      targetPort: 8080
-    - exposure: public
-      name: myurl
-      path: /
-      protocol: http
-      targetPort: 8080
     image: quay.io/eclipse/che-python-3.7:nightly
     mountSources: true
   name: py-web

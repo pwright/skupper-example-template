@@ -19,6 +19,7 @@
 
 import os
 import requests
+import socket
 
 from flask import Flask, Response
 
@@ -26,6 +27,8 @@ app = Flask(__name__)
 
 host = os.environ.get("FRONTEND_SERVICE_HOST", "0.0.0.0")
 port = int(os.environ.get("FRONTEND_SERVICE_PORT", 8080))
+host_name = socket.gethostname()
+host_ip = socket.gethostbyname(host_name)
 
 backend_host = os.environ.get("BACKEND_SERVICE_HOST", "hello-world-backend")
 backend_port = int(os.environ.get("BACKEND_SERVICE_PORT", 8080))
@@ -33,7 +36,7 @@ backend_port = int(os.environ.get("BACKEND_SERVICE_PORT", 8080))
 @app.errorhandler(Exception)
 def error(e):
     app.logger.error(e)
-    return Response(f"Connection Trouble! {e}\n", status=500, mimetype="text/plain")
+    return Response(f"Connection to backend not available yet! This service is running on {host_ip}\n", status=500, mimetype="text/plain")
 
 @app.route("/")
 def message():
