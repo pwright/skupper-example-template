@@ -1,8 +1,8 @@
 schemaVersion: 2.0.0
 metadata:
-  name: python
+  name: hello-world-backend
   version: 1.0.0
-  displayName: Python
+  displayName: hello-world-backend
   description: Python Stack with Python 3.7
   icon: https://www.python.org/static/community_logos/python-logo-generic.svg
   tags: ["Python", "pip"]
@@ -31,7 +31,7 @@ commands:
       component: py-web
   - id: run-app
     exec:
-      commandLine: "python app.py"
+      commandLine: "python main.py"
       workingDir: ${PROJECTS_ROOT}
       component: py-web
       group:

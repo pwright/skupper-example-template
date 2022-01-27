@@ -51,7 +51,7 @@ steps:
         - run: kubectl create deployment hello-world-frontend --image quay.io/skupper/hello-world-frontend
           await: [deployment/hello-world-frontend]
       east:
-        - run: kubectl create deployment hello-world-backend --image quay.io/skupper/hello-world-backend
+        - run: cd backend;odo push
           await: [deployment/hello-world-backend]
   - title: Expose the backend service
     preamble: |
@@ -124,14 +124,3 @@ summary: |
   the frontend.
 
   <img src="images/sequence.svg" width="640"/>
-cleaning_up:
-  preamble: !string cleaning_up_preamble
-  commands:
-    west:
-      - run: skupper delete
-      - run: kubectl delete service/hello-world-frontend
-      - run: kubectl delete deployment/hello-world-frontend
-    east:
-      - run: skupper delete
-      - run: kubectl delete deployment/hello-world-backend
-next_steps: !string next_steps
