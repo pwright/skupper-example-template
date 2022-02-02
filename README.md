@@ -96,6 +96,12 @@ Console for _east_:
 export KUBECONFIG=~/.kube/config-east
 ~~~
 
+Console for _north_:
+
+~~~ shell
+export KUBECONFIG=~/.kube/config-north
+~~~
+
 ## Step 2: Access your clusters
 
 The methods for accessing your clusters vary by Kubernetes provider.
@@ -129,6 +135,13 @@ Console for _east_:
 ~~~ shell
 kubectl create namespace east
 kubectl config set-context --current --namespace east
+~~~
+
+Console for _north_:
+
+~~~ shell
+kubectl create namespace north
+kubectl config set-context --current --namespace north
 ~~~
 
 ## Step 4: Install Skupper in your namespaces
@@ -172,6 +185,12 @@ skupper status
 ~~~
 
 Console for _east_:
+
+~~~ shell
+skupper status
+~~~
+
+Console for _north_:
 
 ~~~ shell
 skupper status

@@ -27,6 +27,9 @@ sites:
   east:
     kubeconfig: ~/.kube/config-east
     namespace: east
+  north:
+    kubeconfig: ~/.kube/config-north
+    namespace: north
 steps:
   - standard: configure_separate_console_sessions
   - standard: access_your_clusters
