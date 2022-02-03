@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <svg
    version="1.1"
-   width="782px"
+   width="1182px"
    height="311px"
-   viewBox="-0.5 -0.5 782 311"
+   viewBox="-0.5 -0.5 1182 311"
    style="background-color: rgb(255, 255, 255);"
    id="svg213"
    sodipodi:docname="entities.svg"
@@ -292,54 +292,6 @@
          id="text179">Kubernetes cluster 2</text>
     </switch>
   </g>
-  <rect
-     x="583.5"
-     y="123"
-     width="135"
-     height="52"
-     rx="7.8000002"
-     ry="7.8000002"
-     fill="#ffffff"
-     stroke="#000000"
-     stroke-width="2"
-     pointer-events="none"
-     id="rect185" />
-  <g
-     transform="translate(602.5,142.5)"
-     id="g191">
-    <switch
-       id="switch189">
-      <foreignObject
-         style="overflow:visible;"
-         pointer-events="all"
-         width="95"
-         height="12"
-         requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility">
-        <xhtml:div
-           style="display: inline-block; font-size: 12px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; vertical-align: top; width: 95px; white-space: nowrap; overflow-wrap: normal; font-weight: bold; text-align: center;">
-          <xhtml:div
-             style="display:inline-block;text-align:inherit;text-decoration:inherit;white-space:normal;">Backend service</xhtml:div>
-        </xhtml:div>
-      </foreignObject>
-      <text
-         x="48"
-         y="12"
-         fill="#000000"
-         text-anchor="middle"
-         font-size="12px"
-         font-family="Helvetica"
-         font-weight="bold"
-         id="text187">Backend service</text>
-    </switch>
-  </g>
-  <path
-     d="m 652,210 h -1 v -35"
-     fill="none"
-     stroke="#008a00"
-     stroke-width="3"
-     stroke-miterlimit="10"
-     pointer-events="none"
-     id="path193" />
   <rect
      x="596.5"
      y="210"

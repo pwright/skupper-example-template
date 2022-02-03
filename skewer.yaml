@@ -19,11 +19,17 @@ overview: |
   services without exposing the backend to the public internet.
 
   <img src="images/entities.svg" width="640"/>
+  Unlike [skupper-example-hello-world](https://github.com/skupperproject/skupper-example-hello-world)
+  there is no connectivity between the clusters hosting the backend and frontend services. To workaround
+  this issue, you can use skupper as a relay to provide the connectivity.
 prerequisites: !string prerequisites
 sites:
   west:
     kubeconfig: ~/.kube/config-west
     namespace: west
+  relay:
+    kubeconfig: ~/.kube/config-relay
+    namespace: relay
   east:
     kubeconfig: ~/.kube/config-east
     namespace: east
@@ -35,6 +41,9 @@ steps:
     preamble: !string install_skupper_in_your_namespaces_preamble
     commands:
       west:
+        - run: skupper init
+          await: [deployment/skupper-service-controller, deployment/skupper-router]
+      relay:
         - run: skupper init
           await: [deployment/skupper-service-controller, deployment/skupper-router]
       east:
@@ -53,7 +62,10 @@ steps:
       west:
         - run: skupper token create ~/west.token
       east:
+        - run: skupper token create ~/east.token
+      relay:
         - run: skupper link create ~/west.token
+        - run: skupper link create ~/east.token
         - run: skupper link status --wait 30
     postamble: !string link_your_namespaces_postamble
   - title: Deploy the frontend and backend services
@@ -69,7 +81,7 @@ steps:
           await: [deployment/hello-world-backend]
   - title: Expose the backend service
     preamble: |
-      We now have two namespaces linked to form a Skupper network, but
+      We now have two namespaces linked using the relay to form a Skupper network, but
       no services are exposed on it.  Skupper uses the `skupper
       expose` command to select a service from one namespace for
       exposure on all the linked namespaces.
@@ -125,9 +137,12 @@ summary: |
   namespaces, on different clusters.  Ordinarily, this means that they
   have no way to communicate unless they are exposed to the public
   internet.
+  Also in this example, the backend cluster cannot connect to the frontend
+  cluster, so we need a relay.
 
   Introducing Skupper into each namespace allows us to create a virtual
-  application network that can connect services in different clusters.
+  application network that can connect services in different clusters
+  over the relay.
   Any service exposed on the application network is represented as a
   local service in all of the linked namespaces.
 
