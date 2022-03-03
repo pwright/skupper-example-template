@@ -138,14 +138,3 @@ summary: |
   the frontend.
 
   <img src="images/sequence.svg" width="640"/>
-cleaning_up:
-  preamble: !string cleaning_up_preamble
-  commands:
-    west:
-      - run: skupper delete
-      - run: kubectl delete service/hello-world-frontend
-      - run: kubectl delete deployment/hello-world-frontend
-    east:
-      - run: skupper delete
-      - run: kubectl delete deployment/hello-world-backend
-next_steps: !string next_steps
